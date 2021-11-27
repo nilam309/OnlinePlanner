@@ -1,0 +1,53 @@
+﻿@model IEnumerable<OnlinePlanner.Models.Task>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddTask")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdated)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td><input data-val="true"
+       data-val-required="The isActive field is required."
+       id="isActive"
+       name="isActive"
+       type="checkbox"
+       value="true" /></td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TaskName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TaskDescription)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastUpdated)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "EditTask", new { id = item.TaskID }) |
+       @* @Html.ActionLink("Details", "Details", new { id = item.TaskID }) |*@
+        @Html.ActionLink("Delete", "Delete", new { id = item.TaskID }, new { onclick = "return confirm('Are you sure you wish to delete this task?');" })
+    </td>
+</tr>
+    }
+
+</table>
+
